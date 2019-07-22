@@ -68,6 +68,16 @@ Converts a 32 bit unsigned number to signed.  If the number
 is negative it indicates an error.  On error a pigpio
 exception will be raised if exceptions is true.
 """
+function _u2i(x::UInt32)
+   v = convert(Int32, x)
+   if v < 0
+      if exceptions
+          error(error_text(v))
+     end
+   end
+   return v
+end
+
 
 struct InMsg
     cmd::Cuint # a bits type
